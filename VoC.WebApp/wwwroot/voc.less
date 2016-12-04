@@ -1,0 +1,55 @@
+voc {
+	display: block; 
+}
+
+.voc {
+		display: flex;
+		align-items: center;
+		min-height: 100%;
+		width: 100%;
+		margin-top: 20px;
+
+		&_login-container {
+			display: block;
+		}
+
+		&_register-container {
+			display: block;
+		}
+
+		&_input {
+			min-height: 295px;
+			font-size: 24px;
+			padding: 8px;
+			background: white;
+
+			& span {
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+
+		&_footer-links {
+			text-align: center;
+			margin-bottom: 20px;
+			margin-top: 10px;
+		}
+
+		#loginForm {
+			display: block;
+		}
+
+		#accountForm {
+			display: none;
+		}
+	}
+
+	.voc_login-container,
+	.voc_register-container {
+		a.btn {
+			margin-top: 28px; 
+		}
+	}
+
+

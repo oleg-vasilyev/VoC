@@ -1,0 +1,30 @@
+{
+  "name": "voc",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "concurrently \"lite-server\" \"grunt\""
+  },
+  "author": "Oleg Vasilyev & Alexander Stukachyov",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "3.1.0",
+    "grunt": "1.0.1",
+    "grunt-autoprefixer": "3.0.4",
+    "grunt-contrib-cssmin": "1.0.2",
+    "grunt-contrib-less": "1.4.0",
+    "grunt-contrib-watch": "1.0.0",
+    "lite-server": "2.2.2"
+  },
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "bootstrap-material-design": "0.5.10",
+    "jquery": "3.1.1",
+    "normalize.css": "4.2.0",
+    "rxjs": "^5.0.0-rc.4"
+  },
+  "main": "gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "//github.com/NortherWind42/VoC.git"
+  }
+}

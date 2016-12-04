@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="../wwwroot/icon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<title>VoC</title>
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+	<link rel="stylesheet" href="../wwwroot/styles.css">
+</head>
+
+<body>
+
+	<voc class="voc">
+
+		<div class="container ">
+
+			<div class="row">
+
+				<div class="col-sm-12 col-md-4 ">
+
+					<div class="well voc_login-container">
+						<form id="loginForm">
+							<fieldset>
+								<legend>Sign in</legend>
+								<div class="form-group label-floating" id="loginInterGroup">
+									<label for="loginInter" class="control-label">Login</label>
+									<input type="email" class="form-control" id="loginInter" required spellcheck="false">
+									<span class="help-block"></span>
+								</div>
+								<div class="form-group label-floating" id="passwordInterGroup">
+									<label for="passwordInter" class="control-label">Password</label>
+									<input type="password" class="form-control" id="passwordInter" required pattern="(.).{5,}">
+									<span class="help-block"></span>
+								</div>
+							</fieldset>
+							<a href="javascript: onLoginClick()" id="loginBtn" class="btn btn-default btn-lg btn-block btn-raised btn-primary">Log in</a>
+						</form>
+						<form id="accountForm">
+							<legend id="greeting"></legend>
+							<a href="javascript:onLogoutClick()" id="logoutBtn" class="btn btn-default btn-lg btn-block btn-raised btn-danger">Log out</a>
+						</form>
+					</div>
+
+					<div class="well voc_register-container">
+						<form autocomplete="off">
+							<fieldset>
+								<legend>Create new account and enter</legend>
+								<div class="form-group label-floating" id="loginRegGroup">
+									<label for="loginReg" class="control-label">Login</label>
+									<input type="email" class="form-control" id="loginReg" required spellcheck="false">
+									<span class="help-block"></span>
+								</div>
+								<div class="form-group label-floating" id="passwordRegGroup">
+									<label for="passwordReg" class="control-label">Password</label>
+									<input type="password" class="form-control" id="passwordReg" required pattern="(.).{5,}">
+									<span class="help-block"></span>
+								</div>
+								<div class="form-group label-floating" id="passwordRegConfirmGroup">
+									<label for="passwordRegConfirm" class="control-label">Confirm password</label>
+									<input type="password" class="form-control" id="passwordRegConfirm" required pattern="(.).{5,}">
+									<span class="help-block"></span>
+								</div>
+							</fieldset>
+							<a href="javascript:onSignUpClick()" class="btn btn-default btn-lg btn-block btn-raised btn-primary">Sing up</a>
+						</form>
+					</div>
+
+				</div>
+
+				<div class="col-sm-12 col-md-8">
+
+					<div>
+
+						<div class="panel well panel-danger voc_info-panel">
+							<div class="panel-heading">
+								<h3 class="panel-title voc_info-panel-content">Hello! Please, sign in.</h3>
+							</div>
+						</div>
+
+						<div class="jumbotron">
+							<div class="container">
+								<div class="voc_input" contenteditable="false" spellcheck="false">
+								</div>
+							</div>
+						</div>
+
+						<div class="well">
+							<table class="table table-striped table-hover">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>User</th>
+										<th>Number of requests</th>
+										<th>Date of last request</th>
+										<th>Time between requests</th>
+									</tr>
+								</thead>
+								<tbody id="topList">
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<p class="voc_footer-links">
+				<span>Created by
+					<br>
+					<a href="//vk.com/neverwind42" target="_blank">Oleg Vasilyev</a>
+					& 
+					<a href="//vk.com/stalkermanru" target="_blank">Alexander Stukachyov</a> 
+				</span>
+			</p>
+
+		</div>
+
+	</voc>
+
+	@RenderBody() @Scripts.Render("~/bundles/app-scripts")
+
+	<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+	<!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
+	<script src="~/signalr/hubs"></script>
+	<script>$.material.init()</script>
+</body>
+
+</html>
