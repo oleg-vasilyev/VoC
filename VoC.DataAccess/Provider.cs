@@ -108,9 +108,9 @@ namespace VoC.DataAccess
             return model;
         }
 
-        public List<UserHistory> GetTopTen()
+        public List<UserHistory> GetTopFive()
         {
-            var users = context.UserHistory.OrderByDescending(m => m.RequestCounter).Skip(0).Take(10).ToList();
+            var users = context.UserHistory.OrderByDescending(m => m.RequestCounter).Skip(0).Take(5).ToList();
             return users;
         }
 

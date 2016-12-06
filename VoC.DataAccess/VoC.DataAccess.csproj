@@ -59,9 +59,9 @@
   <ItemGroup>
     <Compile Include="Language.cs" />
     <Compile Include="MainContext.cs" />
-    <Compile Include="Migrations\201611250800440_sdfgsfdgsdfg.cs" />
-    <Compile Include="Migrations\201611250800440_sdfgsfdgsdfg.Designer.cs">
-      <DependentUpon>201611250800440_sdfgsfdgsdfg.cs</DependentUpon>
+    <Compile Include="Migrations\201612051117497_VoCDB.cs" />
+    <Compile Include="Migrations\201612051117497_VoCDB.Designer.cs">
+      <DependentUpon>201612051117497_VoCDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,8 +84,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611250800440_sdfgsfdgsdfg.resx">
-      <DependentUpon>201611250800440_sdfgsfdgsdfg.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612051117497_VoCDB.resx">
+      <DependentUpon>201612051117497_VoCDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

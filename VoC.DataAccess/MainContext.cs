@@ -10,7 +10,7 @@ namespace VoC.DataAccess
     public partial class MainContext : DbContext
     {
         public MainContext()
-         : base(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=VoC;Integrated Security=True")
+         : base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Aleh_Vasilyeu1\Documents\VoC.mdf;Integrated Security=True;Connect Timeout=30")
 			
         {
 

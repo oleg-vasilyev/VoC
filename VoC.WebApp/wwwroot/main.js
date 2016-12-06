@@ -17,7 +17,7 @@ var authorizeProcess = () => {
 		$("#loginForm").css("display", "none");
 		$("#accountForm").css("display", "block");
 
-		$(".voc_register-container").css("display", "none");
+		$("#registerContainer").css("display", "none");
 
 		console.log(`user ${userName} is authorized`)
 
@@ -145,7 +145,7 @@ function onLogoutClick() {
 		$("#loginForm").css("display", "block");
 		$("#accountForm").css("display", "none");
 
-		$(".voc_register-container").css("display", "block");
+		$("#registerСontainer").css("display", "block");
 		$('#topList tr').detach();
 		console.log("logout is done");
 	});

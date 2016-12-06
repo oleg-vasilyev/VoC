@@ -18,11 +18,6 @@ namespace VoC.WebApp
                             "~/wwwroot/contenteditableTextConverter.js",
                             "~/wwwroot/tooltipInstaller.js",
                             "~/wwwroot/main.js"));
-
-
-            //bundles.Add(new StyleBundle("~/Content/css").Include(
-            //          "~/Content/bootstrap.css",
-            //          "~/Content/site.css"));
         }
     }
 }
