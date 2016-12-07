@@ -75,4 +75,8 @@ _[Ss]cripts
 ######################
 VoC.WebApp/wwwroot/node_modules
 VoC.WebApp/wwwroot/styles.css
+VoC.WebApp/wwwroot/main.js
+VoC.WebApp/wwwroot/contenteditableTextConverter.js
+VoC.WebApp/wwwroot/tooltipInstaller.js
 .vs
+
