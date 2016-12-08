@@ -5,8 +5,12 @@ var stylus = require('gulp-stylus');
 var watch = require('gulp-watch');
 var autoprefixer = require('autoprefixer-stylus');
 var cssmin = require('gulp-cssmin')
-
 var coffee = require('gulp-coffee');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var gulpIgnore = require('gulp-ignore');
+
+var condition = ['gulpfile.js', 'voc.js'];
 
 gulp.task('dev-css', function () {
 	return gulp.src('styles.styl')
@@ -25,10 +29,25 @@ gulp.task('rel-css', function () {
 		.pipe(gulp.dest('./'))
 });
 
-gulp.task('dev-js', function() {
-  gulp.src('*.coffee')
-    .pipe(coffee())
+gulp.task('rel-js', function () {
+	gulp.src('*.coffee')
+		.pipe(coffee())
+		.pipe(gulp.dest('./'));
+	gulp.src('*.js')
+		.pipe(gulpIgnore.exclude(condition))
+    .pipe(concat('voc.js'))
+		.pipe(uglify())
     .pipe(gulp.dest('./'));
+});
+
+gulp.task('dev-js', function () {
+	gulp.src('*.coffee')
+		.pipe(coffee())
+		.pipe(gulp.dest('./'));
+	gulp.src('*.js')
+		.pipe(gulpIgnore.exclude(condition))
+		.pipe(concat('voc.js'))
+		.pipe(gulp.dest('./'));
 });
 
 gulp.task('watch', function () {
@@ -37,4 +56,3 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['watch']);
- 

@@ -14,10 +14,7 @@ namespace VoC.WebApp
                             "~/wwwroot/node_modules/bootstrap/dist/js/bootstrap.min.js",
                             "~/wwwroot/node_modules/bootstrap-material-design/dist/js/material.min.js",
                             "~/wwwroot/node_modules/bootstrap-material-design/dist/js/ripples.min.js",
-                            "~/wwwroot/contenteditableCursorManager.js",
-                            "~/wwwroot/contenteditableTextConverter.js",
-                            "~/wwwroot/tooltipInstaller.js",
-                            "~/wwwroot/main.js"));
+                            "~/wwwroot/voc.js"));
         }
     }
 }
