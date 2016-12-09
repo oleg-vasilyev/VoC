@@ -1,4 +1,8 @@
-// У меня было 400 строк кода, CoffeeScript, препроцессор Stylus, Gulp, собирающий фронтенд, JQuery, RxJS и целое множество правил всех сортов и расцветок, а также медиавыражения, псевдоклассы, миксины и вложенные селекторы. Не то что бы это был необходимый запас для сайта. Но если начал собирать фронтенд, становится трудно остановиться.
+// У меня было 400 строк кода, CoffeeScript, препроцессор Stylus,
+// Gulp, собирающий фронтенд, JQuery, RxJS и целое множество правил всех сортов и расцветок,
+// а также медиавыражения, псевдоклассы, миксины и вложенные селекторы.
+// Не то что бы это был необходимый запас для сайта.
+// Но если начал собирать фронтенд, становится трудно остановиться.
 
 var gulp = require('gulp');
 var stylus = require('gulp-stylus');
@@ -29,17 +33,6 @@ gulp.task('rel-css', function () {
 		.pipe(gulp.dest('./'))
 });
 
-gulp.task('rel-js', function () {
-	gulp.src('*.coffee')
-		.pipe(coffee())
-		.pipe(gulp.dest('./'));
-	gulp.src('*.js')
-		.pipe(gulpIgnore.exclude(condition))
-    .pipe(concat('voc.js'))
-		.pipe(uglify())
-    .pipe(gulp.dest('./'));
-});
-
 gulp.task('dev-js', function () {
 	gulp.src('*.coffee')
 		.pipe(coffee())
@@ -47,6 +40,17 @@ gulp.task('dev-js', function () {
 	gulp.src('*.js')
 		.pipe(gulpIgnore.exclude(condition))
 		.pipe(concat('voc.js'))
+		.pipe(gulp.dest('./'));
+});
+
+gulp.task('rel-js', function () {
+	gulp.src('*.coffee')
+		.pipe(coffee())
+		.pipe(gulp.dest('./'));
+	gulp.src('*.js')
+		.pipe(gulpIgnore.exclude(condition))
+		.pipe(concat('voc.js'))
+		.pipe(uglify())
 		.pipe(gulp.dest('./'));
 });
 

@@ -3,6 +3,13 @@
   "version": "0.0.0",
   "author": "Oleg Vasilyev & Alexander Stukachyov",
   "license": "ISC",
+  "scripts": {
+    "dev-css": "gulp dev-css",
+    "rel-css": "gulp rel-css",
+    "dev-js": "gulp dev-js",
+    "rel-js": "gulp rel-js",
+    "watch": "gulp watch"
+  },
   "devDependencies": {
     "gulp": "3.9.1",
     "gulp-coffee": "2.3.3",
@@ -11,7 +18,8 @@
     "gulp-ignore": "2.0.2",
     "gulp-stylus": "2.6.0",
     "gulp-uglify": "2.0.0",
-    "gulp-watch": "4.3.11"
+    "gulp-watch": "4.3.11",
+    "autoprefixer-stylus": "0.11.0"
   },
   "dependencies": {
     "bootstrap": "3.3.7",
