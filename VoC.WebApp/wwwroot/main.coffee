@@ -130,7 +130,5 @@ updateTopList = ->
 				.join()
 
 $ ->
-	updateTopList()
-	notificationhub = $.connection.userTop
-	notificationhub.client.UpdateList = -> updateTopList()
+	$.connection.userTop.client.UpdateList = -> updateTopList()
 	$.connection.hub.start()
