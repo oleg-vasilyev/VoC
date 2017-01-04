@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessModel;
+using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Security.Cryptography;
 using System.Text;
@@ -102,7 +104,7 @@ namespace VoC.DataAccess
             return isAuthorize;
         }
 
-        public void ChangeToken(string token)
+        public void SignOut(string token)
         {
             string commandText = "update User set Token = @token where Token = @oldToken";
 
@@ -168,6 +170,35 @@ namespace VoC.DataAccess
                 user.Close();
                 return result;
             }
+        }
+
+        public List<UserModel> GetTop(int take)
+        {
+            string commandText = "SELECT profile.*, user.login FROM UserProfile as profile left join User as user on user.Id = profile.Id order by RequestCounter desc LIMIT @take";
+            List<UserModel> userModels = new List<UserModel>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(DbInit.DbInit.ConnectionString))
+            {
+                connection.Open();
+
+                SQLiteCommand command = connection.CreateCommand();
+
+                command.CommandText = commandText;
+                command.Parameters.AddWithValue("take", take);
+                var users = command.ExecuteReader();
+                while (users.Read())
+                {
+                    userModels.Add(new UserModel()
+                    {
+                        Average = users["AverageTime"].ToString(),
+                        Count = users["LastRequest"].ToString(),
+                        LastRequest = users["RequestCounter"].ToString(),
+                        Name = users["Login"].ToString()
+                    });
+                }
+                users.Close();
+            }
+            return userModels;
         }
 
         public void RegistredUserActivity(int userId)
