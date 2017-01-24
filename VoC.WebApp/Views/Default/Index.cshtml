@@ -1,0 +1,95 @@
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+            integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+            crossorigin="anonymous"></script>
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+
+        <button id="login">login</button>
+        <button id="logout">logout</button>
+        <button id="register">register</button>
+        <button id="add">add word</button>
+        <button id="top">get top</button>
+        <input  type="text" id="text"/>
+        <div id="result"></div>
+        <div id="top-d"></div>
+        <script>
+            var login = 'alexadd@alexa.ru';
+            var password = "123456";
+            var token;
+            $(document).ready(function () {
+                $('body').on('click', '#add', function () {
+                    $.ajax({
+                        url: "/api/main/GetTranslation",
+                        method: "GET",
+                        headers: { "auth-token": token },
+                        data: { word: $('#text').val() },
+                        success: function (data) {
+                            $('#result').text(JSON.stringify(data, null, 4));
+                            console.log(data);
+                        }
+                    })
+                })
+                
+            })
+            $(document).ready(function () {
+                $('body').on('click', '#top', function () {
+                    $.ajax({
+                        url: "/api/main/Gettop",
+                        method: "GET",
+                        headers: { "auth-token": token },
+                        data: {  },
+                        success: function (data) {
+                            $('#top-d').text(JSON.stringify(data));
+                            console.log(data);
+                        }
+                    })
+                })
+
+            })
+            $(document).ready(function () {
+                $('body').on('click', '#login', function () {
+                    $.ajax({
+                        url: "/api/account/signin",
+                        method: "POST",
+                        data: { Email: login, Password: password },
+                        success: function (data) {
+                            token = data;
+                            console.log(token);
+                        }
+                    })
+                })
+
+            })
+            $(document).ready(function () {
+                $('body').on('click', '#logout', function () {
+                    $.ajax({
+                        url: "/api/account/Logout",
+                        method: "GET",
+                        headers: { "auth-token": token },
+                    })
+                })
+
+            })
+            $(document).ready(function () {
+                $('body').on('click', '#register', function () {
+                    $.ajax({
+                        url: "/api/account/register",
+                        method: "POST",
+                        data: { Email: login, Password: password, ConfirmPassword: password }
+                    })
+                })
+            })
+        </script>
+    </div>
+</body>
+</html>

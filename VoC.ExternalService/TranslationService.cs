@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace VoC.ExternalService
 {
-    public class TranslationService
+    public static class TranslationService
     {
         private readonly static string[] SupportedLangugaesCode;
         private readonly static Random random;
@@ -23,7 +23,7 @@ namespace VoC.ExternalService
 
             for (int i = 0; i < languageAmount; i++)
             {
-                var selectedLangugeId = random.Next(0, enableLanguages.Count);
+                var selectedLangugeId = random.Next(0, enableLanguages.Count-1);
                 response.Response.Add(new Item() { LanguageCode = enableLanguages[selectedLangugeId], Probability = Math.Round(random.NextDouble() * 100,2) });
                 enableLanguages.RemoveAt(selectedLangugeId);
             }

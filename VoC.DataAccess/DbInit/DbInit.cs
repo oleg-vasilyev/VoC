@@ -48,15 +48,15 @@ namespace VoC.DataAccess.DbInit
                 var command = connection.CreateCommand();
                 command.CommandText = TableInit;
                 command.ExecuteNonQuery();
-                string newProbabilities = "Insert into Languages (LanguageCode) values";
+                string newLanguages = "Insert into Languages (LanguageCode) values";
                 List<string> parameters = new List<string>();
                 foreach (var languageCode in SupportedLangugaesCode)
                 {
                     parameters.Add(string.Format("('{0}')", languageCode));
                 }
-                newProbabilities += string.Join(",", parameters);
+                newLanguages += string.Join(",", parameters);
                 command.Parameters.Clear();
-                command.CommandText = newProbabilities;
+                command.CommandText = newLanguages;
                 command.ExecuteNonQuery();
             }
         }
@@ -77,10 +77,6 @@ namespace VoC.DataAccess.DbInit
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(dbPath));
             }
-            if (File.Exists(dbPath))
-            {
-                File.Delete(dbPath);
-            }
             if (!File.Exists(dbPath))
             {
                 isNew = true;
@@ -88,7 +84,5 @@ namespace VoC.DataAccess.DbInit
             }
             return isNew;
         }
-
-
     }
 }

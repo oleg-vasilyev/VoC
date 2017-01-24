@@ -11,7 +11,7 @@ namespace VoC.DataAccess
     {
         public bool AddNewUser(string login, string password)
         {
-            if (!CheckUser(login))
+            if (CheckUser(login))
             {
                 return false;
             }
@@ -33,10 +33,14 @@ namespace VoC.DataAccess
                 command.Parameters.AddWithValue("password", Encoding.Default.GetString(hashedPassword));
                 command.Parameters.AddWithValue("token", Guid.NewGuid().ToString());
                 command.Parameters.AddWithValue("start", DateTime.Now);
-                var userId = command.ExecuteNonQuery(System.Data.CommandBehavior.KeyInfo);
+                command.ExecuteNonQuery();
+
+                string lastIdQuery = @"select last_insert_rowid()";
+                command = connection.CreateCommand();
+                command.CommandText = lastIdQuery;
+                var userId = int.Parse(command.ExecuteScalar().ToString());
 
                 command = connection.CreateCommand();
-
                 command.CommandText = addProfileCommandText;
                 command.Parameters.AddWithValue("id", userId);
                 command.Parameters.AddWithValue("averageTime", 0);
@@ -60,7 +64,8 @@ namespace VoC.DataAccess
                 command.CommandText = commandText;
                 command.Parameters.AddWithValue("login", login);
                 var result = command.ExecuteReader();
-                var isExists = result.Read();
+                result.Read();
+                var isExists = result[0].ToString() != "0";
                 result.Close();
                 return isExists;
             }
@@ -191,8 +196,8 @@ namespace VoC.DataAccess
                     userModels.Add(new UserModel()
                     {
                         Average = users["AverageTime"].ToString(),
-                        Count = users["LastRequest"].ToString(),
-                        LastRequest = users["RequestCounter"].ToString(),
+                        LastRequest = users["LastRequest"].ToString(),
+                        Count = users["RequestCounter"].ToString(),
                         Name = users["Login"].ToString()
                     });
                 }

@@ -12,6 +12,7 @@ namespace VoC.WebApp
     {
         public void Configuration(IAppBuilder app)
         {
+            VoC.DataAccess.DbInit.DbInit.InitDB();
             ConfigureAuth(app);
         }
     }

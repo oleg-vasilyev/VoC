@@ -1,12 +1,11 @@
 ﻿using System.Web.Http;
-using VoC.WebApp.Models;
 using VoC.DataAccess;
 using VoC.WebApp.Attrebutes;
 using VoC.WebApp.Business;
+using VoC.WebApp.Models;
 
 namespace VoC.WebApp.Controllers
 {
-    [UserAuthorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
@@ -16,6 +15,8 @@ namespace VoC.WebApp.Controllers
             manager = new UserManager();
         }
 
+        [UserAuthorize]
+        [HttpGet]
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
@@ -24,6 +25,7 @@ namespace VoC.WebApp.Controllers
             return Ok();
         }
 
+        [HttpPost]
         [Route("SignIn")]
         public IHttpActionResult SignIn(SignInModel model)
         {
@@ -40,7 +42,7 @@ namespace VoC.WebApp.Controllers
             return Ok(token);
         }
 
-        [AllowAnonymous]
+        [HttpPost]
         [Route("Register")]
         public IHttpActionResult Register(RegisterModel model)
         {
@@ -48,22 +50,11 @@ namespace VoC.WebApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (manager.AddNewUser(model.Email, model.Password))
+            if (!manager.AddNewUser(model.Email, model.Password))
             {
                 return BadRequest();
             }
             return Ok();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && _userManager != null)
-            {
-                _userManager.Dispose();
-                _userManager = null;
-            }
-
-            base.Dispose(disposing);
         }
     }
 }

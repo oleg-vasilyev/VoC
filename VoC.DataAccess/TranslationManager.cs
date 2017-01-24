@@ -24,10 +24,9 @@ namespace VoC.DataAccess
 
             using (SQLiteConnection connection = new SQLiteConnection(DbInit.DbInit.ConnectionString))
             {
-
+                
                 word = word.ToLower();
                 connection.Open();
-
 
                 SQLiteCommand command = connection.CreateCommand();
 
@@ -38,6 +37,7 @@ namespace VoC.DataAccess
                 if (result.Read())
                 {
                     var id = result["Id"].ToString();
+                    result.Close();
                     command = connection.CreateCommand();
                     command.CommandText = "Select l.LanguageCode, p.Probability from Probabilities as p left join Languages as l on p.LanguageId = l.Id where p.WordId = @wordId";
                     command.Parameters.AddWithValue("wordId", id);
@@ -47,24 +47,31 @@ namespace VoC.DataAccess
                     {
                         translations.Add(new TranslationModel() { LanguageCode = languges["LanguageCode"].ToString(), Probability = languges["Probability"].ToString() });
                     }
+                    languges.Close();
 
                 }
                 else
                 {
                     var serviceResult = this.GetTranslationsFromService(word);
                     translations = serviceResult.Response.Select(m => new TranslationModel() { LanguageCode = m.LanguageCode, Probability = Math.Round(m.Probability, 2).ToString() }).ToList();
+                    result.Close();
 
                     command = connection.CreateCommand();
                     command.CommandText = "Insert into Words (Word)values(@word)";
                     command.Parameters.AddWithValue("word", word);
-                    var wordId = command.ExecuteNonQuery(CommandBehavior.KeyInfo);
+                    command.ExecuteNonQuery();
+
+                    string lastIdQuery = @"select last_insert_rowid()";
+                    command = connection.CreateCommand();
+                    command.CommandText = lastIdQuery;
+                    var wordId = int.Parse(command.ExecuteScalar().ToString());
 
                     if (serviceResult.Response.Count > 0)
                     {
                         command = connection.CreateCommand();
                         command.CommandText = "Select * from Languages where LanguageCode in (" + string.Join(",", serviceResult.Response.Select(m => "'" + m.LanguageCode + "'")) + ")";
                         result = command.ExecuteReader();
-
+                        
                         string newProbabilities = "Insert into Probabilities (Probability, LanguageId, WordId) values";
                         List<string> parameters = new List<string>();
                         while (result.Read())

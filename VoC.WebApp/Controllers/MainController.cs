@@ -24,8 +24,9 @@ namespace VoC.WebApp.Controllers
             if (!string.IsNullOrWhiteSpace(word) && word.Length > 3)
             {
                 string result = string.Empty;
-                var selectedWord = translationManager.GetLanguagesProbabilities(word);
-                return Ok(selectedWord);
+                var translations = translationManager.GetLanguagesProbabilities(word);
+                userManager.RegistredUserActivity(this.UserId);
+                return Ok(translations);
             }
             else
             {
